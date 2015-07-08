@@ -1,35 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Tic Tac Toe Ultimate</title>
-        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" />
-        <link rel="stylesheet" href="assets/styles/style.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Bootstrap Example</a>
-                </div>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="email">
-                    <input type="text" class="form-control" placeholder="password">
-                    <button type="register" class="btn btn-default">Register</button>
-                </div>
-            </form>
-            </div>
-            <div></div>
-        </nav>
-        <div class="container">
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Tic Tac Toe Ultimate</title>
+
+  <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+   --><link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="assets/styles/style.css" />
+
+  <!-- <link rel="stylesheet" type="text/css" href="tictactoe.css"> -->
+  <link rel="stylesheet" type="text/css" href="radio.css">
+</head>
+
+<body>
+  <div class="main">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="header">Tic Tac Toe Utimate</div>
+      <form class="navbar-form navbar-center" role="login">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="email">
+            <input type="text" class="form-control" placeholder="password">
+            <button type="register" class="btn-login">Register</button>
+            <button type="register" class="btn-login">Login</button>
         </div>
-        <footer class="footer panel-footer">
-           <p class="text-muted">Blah blah blah</p>
-        </footer>
-        <script src="app.js" type="text/javascript" charset="utf-8" async defer></script>
-    </body>
+      </form>
+    </nav>
+
+    <div class="selectors">
+      <ul class="play-against">
+        <!-- <uh>Play against</uh> -->
+        <li>person</li>
+        <li>computer</li>
+      </ul>
+
+      <form>
+        <legend>Play against:</legend>
+        <input type="radio" name="player" value="person" checked>person
+        <br>
+        <input type="radio" name="player" value="computer">computer
+      </form>
+
+      <div>
+        <input type="radio" name="radio" id="radio1" class="radio" checked>
+        <label for="radio1">Person</label>
+      </div>
+      <div>
+        <input type="radio" name="radio" id="radio2" class="radio"/>
+        <label for="radio2">Computer</label>
+      </div>
+    </div>
+
+    <div class="game-board">
+      <div id="gameBox" class="board">
+
+        <div id="0" class="cell"></div>
+        <div id="1" class="cell"></div>
+        <div id="2" class="cell"></div>
+        <div id="3" class="cell"></div>
+        <div id="4" class="cell"></div>
+        <div id="5" class="cell"></div>
+        <div id="6" class="cell"></div>
+        <div id="7" class="cell"></div>
+        <div id="8" class="cell"></div>
+      </div>
+
+      <div class="buttons-row">
+        <div class="reset-button">New Game</div>
+        <div class="reset-button">Save Game</div>
+      </div>
+    </div>
+
+    <div class="selectors">
+      <div class="score">
+        <div class="scroe label">Player X</div>
+        <div id="playerX"></div>
+      </div>
+      <div class="score">
+        <div class="scroe label">Player O</div>
+        <div id="playerO"></div>
+      </div>
+      <div class="score">
+        <div class="scroe label">Tie</div>
+        <div id="tie"></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="tictactoe_ultimate.js"></script>
+  <script type="text/javascript" src="game_engine.js"></script>
+</body>
 </html>

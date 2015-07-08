@@ -1,18 +1,131 @@
-
-.body {
-  color: red;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.navbar {
-  margin-bottom: 20px;
+body {
+  background-color: #D6DBE9;  /*#2A2A2A*/
+  margin: 0px;
+  font-family: wf_segoe-ui_normal,"Segoe UI","Segoe WP",Tahoma,Arial,sans-serif;
 }
 
 .main {
-  margin-top: 50px;
+  width: 70%;
+  margin-left: 20%;
+  margin: auto;
 }
 
-/*.footer {
-  position: fixed;
-}*/
+.header {
+  text-align: center;
+  font-weight: 400px;
+  font-size: 40px;
+  line-height: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar-default {
+  text-align: center;
+  color: #A5CE00;
+  background-image: none;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+
+.btn-login {
+  color: #fff;
+  background-color: #00ABEC;
+  font-size: 12px;
+  border-style: none;
+  padding: 2px;
+}
+
+.selectors {
+  width: 20%;
+  background-color: #00ABEC;
+  height: 600px;
+  float: left;
+  color: white;
+  text-align: center;
+}
+
+.game-board {
+  width: 60%;
+  background-color: #FFF;
+  height: 600px;
+  float: left;
+}
+
+.board {
+  background: #525252;
+  border: 5px solid #A5CE00;
+  width: 330px;
+  height: 330px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.cell {
+  border: 5px solid #A5CE00;
+  float: left;
+  text-align: center;
+  font-size: 100px;
+  width: 100px;
+  height: 100px;
+  text-shadow: 1px 1px 0px #FFF;
+  line-height: 100px;
+}
+
+.play-against {
+  display: block;
+  list-style-type: disc;
+  margin-top: 1em;
+  margin-bottom: 1 em;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 40px;
+  text-align: left;
+  text-indent: 5px;
+}
+
+.buttons-row {
+  border: 2px solid black;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reset-button {
+/*  margin-left: 10px;
+  margin-right: 10px;*/
+  background-color: #A5CE00;
+  /*width: 100px;*/
+  height: 35px;
+  font-size: 12px;
+  text-align: center;
+  line-height:35px;
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.score {
+  width: 80%;
+  height: 30px;
+  margin-top: 40px;
+  margin-left: 15px;
+  text-align: left;
+  line-height: 30px;
+  background-color: #A5CE00;
+  text-indent: 5px;
+  font-size: 12px;
+}
+
+.score .label {
+  float: left;
+  width: 60%;
+  background-color: #A5CE00;
+}
+
+#playerX, #playerO, #tie {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+}
