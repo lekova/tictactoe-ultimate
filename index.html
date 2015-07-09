@@ -20,21 +20,17 @@
       <div class="header">Tic Tac Toe Utimate</div>
       <form class="navbar-form navbar-center" role="login">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="email">
-            <input type="text" class="form-control" placeholder="password">
-            <button type="register" class="btn-login">Register</button>
-            <button type="register" class="btn-login">Login</button>
+            <input id="email" type="text" class="form-control" placeholder="email">
+            <input id="password" type="text" class="form-control" placeholder="password">
+            <button id="register" class="btn-login">Register</button>
+            <button id="login" class="btn-login">Login</button>
         </div>
       </form>
     </nav>
 
     <div class="selectors">
-      <form>
-        <legend>Play against:</legend>
-        <input type="radio" name="player" value="person" checked>person
-        <br>
-        <input type="radio" name="player" value="computer">computer
-      </form>
+      <div id="invite" class="score">Invite player O</div>
+      <div id="computer" class="score">Play computer</div>
     </div>
 
     <div class="game-board">
@@ -72,7 +68,6 @@
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script type="text/javascript" src="tictactoe_ultimate.js"></script>
   <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
