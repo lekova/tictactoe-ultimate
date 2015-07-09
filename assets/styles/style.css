@@ -86,21 +86,23 @@ body {
 }
 
 .buttons-row {
-  border: 2px solid black;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  /*border: 2px solid black;*/
+  margin-top: 40px;
+  line-height: 30px;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
 .reset-button {
-/*  margin-left: 10px;
-  margin-right: 10px;*/
+  width: 65px;
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: #A5CE00;
   /*width: 100px;*/
-  height: 35px;
+  height: 30px;
   font-size: 12px;
   text-align: center;
-  line-height:35px;
+  line-height:30px;
   float: left;
   padding-left: 10px;
   padding-right: 10px;
