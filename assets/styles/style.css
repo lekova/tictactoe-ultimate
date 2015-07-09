@@ -86,7 +86,6 @@ body {
 }
 
 .buttons-row {
-  /*border: 2px solid black;*/
   margin-top: 40px;
   line-height: 30px;
   margin-left: 30%;
@@ -98,7 +97,6 @@ body {
   margin-left: 10px;
   margin-right: 10px;
   background-color: #A5CE00;
-  /*width: 100px;*/
   height: 30px;
   font-size: 12px;
   text-align: center;
@@ -106,6 +104,7 @@ body {
   float: left;
   padding-left: 10px;
   padding-right: 10px;
+  color: #fff;
 }
 
 .score {
@@ -118,6 +117,7 @@ body {
   background-color: #A5CE00;
   text-indent: 5px;
   font-size: 12px;
+  /*border: 2px solid  black;*/
 }
 
 .score .label {
@@ -131,3 +131,20 @@ body {
   height: 30px;
   line-height: 30px;
 }
+
+legend {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  width: 80%;
+  height: 35px;
+  background-color: #A5CE00;
+  line-height: 35px;
+  font-size: 12px;
+}
+
+#invite:hover, #computer:hover {
+  cursor: pointer;
+  background-color: #AED600;
+}
+
