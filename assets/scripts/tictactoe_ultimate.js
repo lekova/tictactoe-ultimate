@@ -20,12 +20,13 @@ var cells = document.getElementsByClassName('cell');
 
 $('.cell').on('click', function() {
 
-  if(isComputer === 1 && turn === 1) {
+  if(isComputer === 1 && turn === 1 && gameOver === 0) {
     var position = game.computerPlay(moves);
     $('#' + position).text('O');
     game.setGameBoard(position, 'O');
     turn = 0;
     moves++;
+    addToList();
   }
 
   var element = $(this);
@@ -49,16 +50,19 @@ $('.cell').on('click', function() {
   // increment total moves
   moves++;
 
-  if (moves < 5) {
-    if(isComputer === 1 && turn === 1) {
-      var position = game.computerPlay(moves);
+  if (moves < 5 && isComputer === 0) {
+    addToList();
+    return;
+  }
+  else if (moves < 5 && isComputer === 1 && turn === 1 && gameOver === 0) {
+      var position = game.setRandomPosition();
       $('#' + position).text('O');
       game.setGameBoard(position, 'O');
       turn = 0;
       moves++;
-    }
-    return;
-  } else {
+      addToList();
+  }
+  else {
     var win = game.checkWin();
     if (win === 'X' && gameOver === 0) {
       alert('Player X wins');
@@ -74,12 +78,7 @@ $('.cell').on('click', function() {
       gameOver = 1;
     }
 
-    // show current result
-    $('#playerX').text(score.playerX);
-    $('#playerO').text(score.playerO);
-    $('#tie').text(score.tie);
-
-    if(isComputer === 1 && turn === 1) {
+    if(isComputer === 1 && turn === 1 && gameOver === 0) {
       var position = game.computerPlay(moves);
       $('#' + position).text('O');
       game.setGameBoard(position, 'O');
@@ -87,7 +86,22 @@ $('.cell').on('click', function() {
       moves++;
     }
   }
+
+  // show current result
+  $('#playerX').text(score.playerX);
+  $('#playerO').text(score.playerO);
+  $('#tie').text(score.tie);
+
+  addToList();
 });
+
+function addToList() {
+  var elementText = moves + '. ' + 'Player \'' ;
+  (turn === 0) ? elementText += 'X' : elementText += 'O';
+  elementText += '\' turn';
+
+  $('#turnsList').append('<li>' + elementText + '</li>')
+}
 
 $('#newgame').on('click', function() {
   newGame();
@@ -104,6 +118,7 @@ $('.reset-button').on('mouseleave', function() {
 
 $('#computer').on('click', function(){
   $('#playerOid').text('Computer');
+  $('#computer').css('border', '2px solid black');
   isComputer = 1;
   turn = 0;
   newGame();
@@ -114,13 +129,16 @@ function newGame() {
     $(this).text('');
   });
 
+  $('#turnsList').html('');
+
   game.resetGameBoard();
   moves = 0;
   gameOver = 0;
 
-  // when starting a new game computer shou
+  // when starting a new game against computer and it is computers turn to be first
   if (isComputer === 1 && turn === 1) {
     var position = game.computerPlay(0);
     $('#' + position).text('O');
+    turn = 1;
   }
 }
