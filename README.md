@@ -1,5 +1,3 @@
-//# tictactoe-ultimate
-
 # TIC TAC TOE
 
 Tic Tac Toe is one of the best known games in the world. This project creates a web page that gives the user the option to play against another user or against coputer.
@@ -26,7 +24,7 @@ Major rules:
 - Labels should be more responsive to show what is the current playing mode
 - Bug in code when playing against computer, player X moves are sometimes overriden by player O
 
-## Linkes to:
+## Links to:
 
 - Wireframes
 (those are on paper, could've taken a picture)
