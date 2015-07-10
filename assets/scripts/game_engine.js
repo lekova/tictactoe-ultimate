@@ -15,15 +15,15 @@ var _getRandomInRange = function(max, min) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-var _setRandomPosition = function(position) {
+var _setRandomPosition = function() {
   var openPositions = [];
 
   // put the indexes of all empty cells in a new array
-  board.forEach(function(element, index, board){
-    if (element !== '') {
-      openPositions.push(index);
+  for (var i = 0; i < 9; i++) {
+    if (board[i] === '') {
+      openPositions.push(i);
     }
-  });
+  };
 
   // get a random number for the indexes of the array
   var ran = _getRandomInRange(0, openPositions.length);
@@ -119,6 +119,7 @@ module.exports = {
   gameBoard: board,
   setGameBoard: _setGameBoard,
   resetGameBoard: _resetGameBoard,
+  setRandomPosition: _setRandomPosition,
   checkWin: _checkWin,
   computerPlay: _computerPlay,
   isBoardEmpty: _isBoardEmpty
