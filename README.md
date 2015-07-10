@@ -27,7 +27,7 @@ Major rules:
 ## Links to:
 
 - Wireframes
-(those are on paper, could've taken a picture)
+  - [Initial idea](https://docs.google.com/drawings/d/1UpgbJ2Lv5f0QC47BHXggs2AnLdOoKnktrjnpPVA31Pk/edit)
 
 - User stories
-(link to user_stories.txt)
+  - [Version 1](https://github.com/lekova/tictactoe-ultimate/blob/master/user_stories.txt)
