@@ -54,7 +54,6 @@ body {
 }
 
 .board {
-  background: #525252;
   border: 5px solid #A5CE00;
   width: 330px;
   height: 330px;
@@ -85,26 +84,20 @@ body {
   text-indent: 5px;
 }
 
-.buttons-row {
-  margin-top: 40px;
-  line-height: 30px;
-  margin-left: 30%;
-  margin-right: 30%;
-}
-
 .reset-button {
   width: 65px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #A5CE00;
   height: 30px;
   font-size: 12px;
   text-align: center;
   line-height:30px;
-  float: left;
   padding-left: 10px;
   padding-right: 10px;
   color: #fff;
+
 }
 
 .score {
