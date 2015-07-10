@@ -20,8 +20,12 @@ var cells = document.getElementsByClassName('cell');
 
 $('.cell').on('click', function() {
 
-  if(isComputer === 1) {
-    game.computerPlay();
+  if(isComputer === 1 && turn === 1) {
+    var position = game.computerPlay(moves);
+    $('#' + position).text('O');
+    game.setGameBoard(position, 'O');
+    turn = 0;
+    moves++;
   }
 
   var element = $(this);
@@ -40,16 +44,19 @@ $('.cell').on('click', function() {
   }
 
   // change the players turn
-  if (turn === 0) {
-    turn = 1;
-  } else {
-    turn = 0;
-  }
+  (turn === 0) ? turn = 1 : turn = 0;
 
   // increment total moves
   moves++;
 
   if (moves < 5) {
+    if(isComputer === 1 && turn === 1) {
+      var position = game.computerPlay(moves);
+      $('#' + position).text('O');
+      game.setGameBoard(position, 'O');
+      turn = 0;
+      moves++;
+    }
     return;
   } else {
     var win = game.checkWin();
@@ -71,6 +78,14 @@ $('.cell').on('click', function() {
     $('#playerX').text(score.playerX);
     $('#playerO').text(score.playerO);
     $('#tie').text(score.tie);
+
+    if(isComputer === 1 && turn === 1) {
+      var position = game.computerPlay(moves);
+      $('#' + position).text('O');
+      game.setGameBoard(position, 'O');
+      turn = 0;
+      moves++;
+    }
   }
 });
 
@@ -90,6 +105,8 @@ $('.reset-button').on('mouseleave', function() {
 $('#computer').on('click', function(){
   $('#playerOid').text('Computer');
   isComputer = 1;
+  turn = 0;
+  newGame();
 });
 
 function newGame() {
@@ -101,7 +118,9 @@ function newGame() {
   moves = 0;
   gameOver = 0;
 
+  // when starting a new game computer shou
   if (isComputer === 1 && turn === 1) {
-    game.computerPlay();
+    var position = game.computerPlay(0);
+    $('#' + position).text('O');
   }
 }
