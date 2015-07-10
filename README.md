@@ -31,3 +31,4 @@ Major rules:
 - Wireframes
 
 - User stories
+(link to user_stories.txt)
