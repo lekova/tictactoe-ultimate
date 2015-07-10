@@ -1,0 +1,17 @@
+## Version 1
+
+##Play with person:
+Prompt to get player X name;
+Prompt to get peayer O name;
+Player X selects a cell on the board;
+Player O selects a cell on the board;
+On the 5th move and after check for winner;
+Display alert message when there is a winner;
+Save score and display it on a pannel;
+Click 'new game' button that clears the board;
+On the second game player O is first;
+
+##Play with computer;
+Select an option to play agains computer;
+Clear the board, clear the score, change right panel player O label to 'computer';
+Use 'play against person' user story.
