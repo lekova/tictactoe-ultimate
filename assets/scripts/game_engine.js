@@ -7,7 +7,7 @@ var _setGameBoard = function(position, sign) {
   board[position] = sign;
 };
 
-var _resetGameBoard = function() {
+var _newGame = function() {
   board = ['', '', '', '', '', '', '', '', ''];
 };
 
@@ -23,11 +23,11 @@ var _setRandomPosition = function() {
     if (board[i] === '') {
       openPositions.push(i);
     }
-  };
+  }
 
   // get a random number for the indexes of the array
   var ran = _getRandomInRange(0, openPositions.length);
-  console.log("random is :", ran);
+  console.log('random is :', ran);
 
   // return the index of the element that sit on the randomed position
   return openPositions[ran];
@@ -67,10 +67,10 @@ var _isBoardEmpty = function() {
   board.forEach(function(cell) {
     isEmpty = cell;
   });
-  return (isEmpty == true);
+  return (isEmpty === true);
 };
 
-var _computerPlay = function(moves) {
+var _computerPlayPosition = function(moves) {
   var pos;
 
   // if computer is first
@@ -107,7 +107,7 @@ var _computerPlay = function(moves) {
         // if non of the above gets a winner set the element back to empty
         currentBoard[i] = '';
       }
-    };
+    }
 
     var indexPos = _setRandomPosition();
     board[indexPos] ='O';
@@ -117,10 +117,11 @@ var _computerPlay = function(moves) {
 
 module.exports = {
   gameBoard: board,
+  newGame: _newGame,
   setGameBoard: _setGameBoard,
-  resetGameBoard: _resetGameBoard,
+ // resetGameBoard: _resetGameBoard,
   setRandomPosition: _setRandomPosition,
   checkWin: _checkWin,
-  computerPlay: _computerPlay,
+  computerPlayPosition: _computerPlayPosition,
   isBoardEmpty: _isBoardEmpty
 };
