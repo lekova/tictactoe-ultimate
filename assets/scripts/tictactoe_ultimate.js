@@ -22,14 +22,12 @@ $('#tie').text(score.tie);
 var computerSetPosition = function(moves) {
   // when starting a new game against computer and it is computers turn to be first
   var position;
-  if (singleMode === 1 && turn === 'PlayerO') {
-    position = game.computerPlayPosition(0);
-  } else {
-    position = game.computerPlayPosition(moves);
-    $('#' + position).text('O');
-    game.setGameBoard(position, 'O');
-    turn = 'PlayerX';
-  }
+
+  position = game.computerPlayPosition(moves);
+
+  $('#' + position).text('O');
+  game.setGameBoard(position, 'O');
+  turn = 'PlayerX';
 };
 
 var newGame = function() {
@@ -42,13 +40,46 @@ var newGame = function() {
   moves = 0;
   gameOver = 0;
 
-  computerSetPosition(0);
+  if(turn === 'PlayerO') {
+    computerSetPosition(0);
+    moves++;
+  }
 };
 
 var addToList = function() {
-  var elementText = moves + '. ' + 'Player \'' + turn + '\' turn';
+  var elementText = moves + '. ' + turn + ' turn';
   $('#turnsList').append('<li>' + elementText + '</li>');
 };
+
+var setScoreBoard = function() {
+
+  // show current result
+  $('#playerX').text(score.playerX);
+  $('#playerO').text(score.playerO);
+  $('#tie').text(score.tie);
+}
+
+var checkWinner = function() {
+  var win = game.checkWin();
+  if (win === 'X') {
+    alert('Player X wins');
+    score.playerX += 1;
+    gameOver = 1;
+    setScoreBoard();
+  } else if (win === 'O') {
+    alert('Player O wins');
+    score.playerO += 1;
+    gameOver = 1;
+    setScoreBoard();
+  } else if (win === '' && moves === 9) {
+    alert('It is tie');
+    score.tie += 1;
+    gameOver = 1;
+    setScoreBoard();
+  } else {
+    // just continue
+  }
+}
 
 $('#newgame').on('click', function() {
   newGame();
@@ -80,44 +111,40 @@ $('.cell').on('click', function() {
     return;
   }
 
-  if (turn === 'PlayerX') {
-    element.text('X');
-    game.setGameBoard(element.attr('id'), 'X');
-    turn = 'PlayerO';
-  } else {
-    var position = game.getComputerTurnPosition(moves);
-    $('#' + position).text('O');
-    game.setGameBoard(position, 'O');
-    turn = 'PlayerX';
-  }
+  moves++;
 
-  if (moves < 5) {
-    if (turn === 'PlayerO') {
+  if (singleMode === 0) {
+    if (turn === 'PlayerX') {
+      element.text('X');
+      game.setGameBoard(element.attr('id'), 'X');
+      turn = 'PlayerO';
+    }
+    else {
+      var position = game.getComputerTurnPosition(moves);
+      $('#' + position).text('O');
+      game.setGameBoard(position, 'O');
+      turn = 'PlayerX';
+    }
+
+    addToList();
+    checkWinner();
+  } else {
+      element.text('X');
+      game.setGameBoard(element.attr('id'), 'X');
+      addToList();
+      turn = 'PlayerO';
+      checkWinner();
+
+      // now it is player O turn
+      moves++;
+      addToList();
       computerSetPosition(moves);
-    }
-
-    return;
-  } else {
-    var win = game.checkWin();
-    if (win === 'X') {
-      alert('Player X wins');
-      score.playerX += 1;
-      gameOver = 1;
-    } else if (win === 'O') {
-      alert('Player O wins');
-      score.playerO += 1;
-      gameOver = 1;
-    } else if (win === '' && moves === 9) {
-      alert('It is tie');
-      score.tie += 1;
-      gameOver = 1;
-    }
+      checkWinner();
+    // else {
+    //   computerSetPosition(moves);
+    //   moves++;
+    //   addToList();
+    //   checkWinner();
+    // }
   }
-
-  // show current result
-  $('#playerX').text(score.playerX);
-  $('#playerO').text(score.playerO);
-  $('#tie').text(score.tie);
-
-  addToList();
 });
