@@ -171,7 +171,7 @@ var _setGameBoard = function(position, sign) {
   board[position] = sign;
 };
 
-var _resetGameBoard = function() {
+var _newGame = function() {
   board = ['', '', '', '', '', '', '', '', ''];
 };
 
@@ -179,19 +179,19 @@ var _getRandomInRange = function(max, min) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-var _setRandomPosition = function(position) {
+var _setRandomPosition = function() {
   var openPositions = [];
 
   // put the indexes of all empty cells in a new array
-  board.forEach(function(element, index, board){
-    if (element !== '') {
-      openPositions.push(index);
+  for (var i = 0; i < 9; i++) {
+    if (board[i] === '') {
+      openPositions.push(i);
     }
-  });
+  }
 
   // get a random number for the indexes of the array
   var ran = _getRandomInRange(0, openPositions.length);
-  console.log("random is :", ran);
+  console.log('random is :', ran);
 
   // return the index of the element that sit on the randomed position
   return openPositions[ran];
@@ -200,28 +200,26 @@ var _setRandomPosition = function(position) {
 var _checkWin = function() {
 
   if ((board[0] + board[1] + board[2]) === 'XXX' ||
-      (board[3] + board[4] + board[5]) === 'XXX' ||
-      (board[6] + board[7] + board[8]) === 'XXX' ||
-      (board[0] + board[3] + board[6]) === 'XXX' ||
-      (board[1] + board[4] + board[7]) === 'XXX' ||
-      (board[2] + board[5] + board[8]) === 'XXX' ||
+    (board[3] + board[4] + board[5]) === 'XXX' ||
+    (board[6] + board[7] + board[8]) === 'XXX' ||
+    (board[0] + board[3] + board[6]) === 'XXX' ||
+    (board[1] + board[4] + board[7]) === 'XXX' ||
+    (board[2] + board[5] + board[8]) === 'XXX' ||
 
-      (board[0] + board[4] + board[8]) === 'XXX' ||
-      (board[2] + board[4] + board[6]) === 'XXX') {
+    (board[0] + board[4] + board[8]) === 'XXX' ||
+    (board[2] + board[4] + board[6]) === 'XXX') {
     return 'X';
-  }
-  else if ((board[0] + board[1] + board[2]) === 'OOO' ||
-          (board[3] + board[4] + board[5]) === 'OOO' ||
-          (board[6] + board[7] + board[8]) === 'OOO' ||
-          (board[0] + board[3] + board[6]) === 'OOO' ||
-          (board[1] + board[4] + board[7]) === 'OOO' ||
-          (board[2] + board[5] + board[8]) === 'OOO' ||
+  } else if ((board[0] + board[1] + board[2]) === 'OOO' ||
+    (board[3] + board[4] + board[5]) === 'OOO' ||
+    (board[6] + board[7] + board[8]) === 'OOO' ||
+    (board[0] + board[3] + board[6]) === 'OOO' ||
+    (board[1] + board[4] + board[7]) === 'OOO' ||
+    (board[2] + board[5] + board[8]) === 'OOO' ||
 
-          (board[0] + board[4] + board[8]) === 'OOO' ||
-          (board[2] + board[4] + board[6]) === 'OOO') {
+    (board[0] + board[4] + board[8]) === 'OOO' ||
+    (board[2] + board[4] + board[6]) === 'OOO') {
     return 'O';
-  }
-  else {
+  } else {
     return '';
   }
 };
@@ -231,10 +229,10 @@ var _isBoardEmpty = function() {
   board.forEach(function(cell) {
     isEmpty = cell;
   });
-  return (isEmpty == true);
+  return (isEmpty === true);
 };
 
-var _computerPlay = function(moves) {
+var _computerPlayPosition = function(moves) {
   var pos;
 
   // if computer is first
@@ -242,25 +240,34 @@ var _computerPlay = function(moves) {
     var taken = true;
     while (taken) {
       pos = Math.floor(Math.random() * (9 - 0) + 0);
-      if (board[pos] === ''){
+      if (board[pos] === '') {
         taken = false;
       }
     }
+
     return pos;
-  }
-  else {
+  } else {
 
     var currentBoard = board;
 
-    for (var i = 0; i < 9; i++ ) {
+    for (var i = 0; i < 9; i++) {
 
-      if(currentBoard[i] === '') {
+      if (currentBoard[i] === '') {
 
         // set current element to O and if that position wins return the index
         currentBoard[i] = 'O';
         if (_checkWin(currentBoard[i]) === 'O') {
           return i;
         }
+
+        // if non of the above gets a winner set the element back to empty
+        currentBoard[i] = '';
+      }
+    }
+
+    for (var i = 0; i < 9; i++) {
+
+      if (currentBoard[i] === '') {
 
         // set current element to O and if that position wins return the index
         currentBoard[i] = 'X';
@@ -271,20 +278,23 @@ var _computerPlay = function(moves) {
         // if non of the above gets a winner set the element back to empty
         currentBoard[i] = '';
       }
-    };
+    }
 
     var indexPos = _setRandomPosition();
-    board[indexPos] ='O';
+    board[indexPos] = 'O';
     return indexPos;
   }
 };
 
 module.exports = {
   gameBoard: board,
+  newGame: _newGame,
   setGameBoard: _setGameBoard,
-  resetGameBoard: _resetGameBoard,
+
+  // resetGameBoard: _resetGameBoard,
+  setRandomPosition: _setRandomPosition,
   checkWin: _checkWin,
-  computerPlay: _computerPlay,
+  computerPlayPosition: _computerPlayPosition,
   isBoardEmpty: _isBoardEmpty
 };
 
@@ -344,10 +354,13 @@ var game = require('./game_engine.js'); // {}
 // var resource = require('./resource_watcher_0.1.0.js');
 // var api = require('./game_ajax.js');
 
-var score = { playerX: 0, playerO: 0, tie: 0 };
-
-var turn = 0; // 0 = player X, 1 = player 0, player X is always first
-var isComputer = 0;
+var score = {
+  playerX: 0,
+  playerO: 0,
+  tie: 0
+};
+var turn; // 0 = player X, 1 = player 0, player X is always first
+var singleMode = 0; // if the player plays with a computer the value is one
 var moves = 0; // total moves in the game (max = 9)
 var gameOver = 0;
 
@@ -355,78 +368,66 @@ $('#playerX').text(score.playerX);
 $('#playerO').text(score.playerO);
 $('#tie').text(score.tie);
 
-var cells = document.getElementsByClassName('cell');
+var computerSetPosition = function(moves) {
+  // when starting a new game against computer and it is computers turn to be first
+  var position = game.computerPlayPosition(moves);
 
-$('.cell').on('click', function() {
+  $('#' + position).text('O');
+  game.setGameBoard(position, 'O');
+  turn = 'PlayerX';
+};
 
-  if(isComputer === 1 && turn === 1) {
-    var position = game.computerPlay(moves);
-    $('#' + position).text('O');
-    game.setGameBoard(position, 'O');
-    turn = 0;
+var newGame = function() {
+  $('.cell').each(function() {
+    $(this).text('');
+  });
+
+  $('#turnsList').html('');
+
+  moves = 0;
+  gameOver = 0;
+  game.newGame();
+
+  if(turn === 'PlayerO') {
+    computerSetPosition(0);
     moves++;
   }
+};
 
-  var element = $(this);
+var addToList = function() {
+  var elementText = moves + '. ' + turn + ' turn';
+  $('#turnsList').append('<li>' + elementText + '</li>');
+};
 
-  // check if the cell is already played
-  if (element.text() !== '' || gameOver === 1) {
-    return;
+var setScoreBoard = function() {
+
+  // show current result
+  $('#playerX').text(score.playerX);
+  $('#playerO').text(score.playerO);
+  $('#tie').text(score.tie);
+}
+
+var checkWinner = function() {
+  var win = game.checkWin();
+  if (win === 'X') {
+    alert('Player X wins');
+    score.playerX += 1;
+    gameOver = 1;
+    setScoreBoard();
+  } else if (win === 'O') {
+    alert('Player O wins');
+    score.playerO += 1;
+    gameOver = 1;
+    setScoreBoard();
+  } else if (win === '' && moves === 9) {
+    alert('It\'s a tie');
+    score.tie += 1;
+    gameOver = 1;
+    setScoreBoard();
   } else {
-    if (turn === 0) {
-      element.text('X');
-      game.setGameBoard(element.attr('id'), 'X');
-    } else {
-      element.text('O');
-      game.setGameBoard(element.attr('id'), 'O');
-    }
+    // just continue
   }
-
-  // change the players turn
-  (turn === 0) ? turn = 1 : turn = 0;
-
-  // increment total moves
-  moves++;
-
-  if (moves < 5) {
-    if(isComputer === 1 && turn === 1) {
-      var position = game.computerPlay(moves);
-      $('#' + position).text('O');
-      game.setGameBoard(position, 'O');
-      turn = 0;
-      moves++;
-    }
-    return;
-  } else {
-    var win = game.checkWin();
-    if (win === 'X' && gameOver === 0) {
-      alert('Player X wins');
-      score.playerX += 1;
-      gameOver = 1;
-    } else if (win === 'O'  && gameOver === 0) {
-      alert('Player O wins');
-      score.playerO += 1;
-      gameOver = 1;
-    } else if (win === '' && gameOver === 0 &&  moves === 9) {
-      alert('It is tie');
-      score.tie += 1;
-      gameOver = 1;
-    }
-
-    // show current result
-    $('#playerX').text(score.playerX);
-    $('#playerO').text(score.playerO);
-    $('#tie').text(score.tie);
-
-    if(isComputer === 1 && turn === 1) {
-      var position = game.computerPlay(moves);
-      $('#' + position).text('O');
-      game.setGameBoard(position, 'O');
-      turn = 0;
-      moves++;
-    }
-  }
-});
+}
 
 $('#newgame').on('click', function() {
   newGame();
@@ -441,28 +442,64 @@ $('.reset-button').on('mouseleave', function() {
   $(this).css('background-color', '#A5CE00');
 });
 
-$('#computer').on('click', function(){
+$('#computer').on('click', function() {
   $('#playerOid').text('Computer');
-  isComputer = 1;
-  turn = 0;
+  $('#computer').css('border', '2px solid black');
+  singleMode = 1;
+  turn = 'PlayerX';
   newGame();
 });
 
-function newGame() {
-  $('.cell').each(function() {
-    $(this).text('');
-  });
+$('.cell').on('click', function() {
 
-  game.resetGameBoard();
-  moves = 0;
-  gameOver = 0;
+  var element = $(this);
 
-  // when starting a new game computer shou
-  if (isComputer === 1 && turn === 1) {
-    var position = game.computerPlay(0);
-    $('#' + position).text('O');
+  // check if the cell is already played
+  if (element.text() !== '' || gameOver === 1) {
+    return;
   }
-}
+
+  moves++;
+
+  if (singleMode === 0) {
+    if (turn === 'PlayerX') {
+      element.text('X');
+      game.setGameBoard(element.attr('id'), 'X');
+      turn = 'PlayerO';
+    }
+    else {
+      var position = game.getComputerTurnPosition(moves);
+      $('#' + position).text('O');
+      game.setGameBoard(position, 'O');
+      turn = 'PlayerX';
+    }
+
+    addToList();
+    checkWinner();
+  } else {
+      element.text('X');
+      game.setGameBoard(element.attr('id'), 'X');
+      addToList();
+      turn = 'PlayerO';
+      checkWinner();
+
+      if(gameOver === 1) {
+        return;
+      }
+
+      // now it is player O turn
+      moves++;
+      addToList();
+      computerSetPosition(moves);
+      checkWinner();
+    // else {
+    //   computerSetPosition(moves);
+    //   moves++;
+    //   addToList();
+    //   checkWinner();
+    // }
+  }
+});
 
 },{"./game_engine.js":2,"jQuery":17}],5:[function(require,module,exports){
 /* ========================================================================
