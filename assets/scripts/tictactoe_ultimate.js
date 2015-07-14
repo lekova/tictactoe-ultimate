@@ -21,9 +21,7 @@ $('#tie').text(score.tie);
 
 var computerSetPosition = function(moves) {
   // when starting a new game against computer and it is computers turn to be first
-  var position;
-
-  position = game.computerPlayPosition(moves);
+  var position = game.computerPlayPosition(moves);
 
   $('#' + position).text('O');
   game.setGameBoard(position, 'O');
@@ -39,6 +37,7 @@ var newGame = function() {
 
   moves = 0;
   gameOver = 0;
+  game.newGame();
 
   if(turn === 'PlayerO') {
     computerSetPosition(0);
@@ -72,7 +71,7 @@ var checkWinner = function() {
     gameOver = 1;
     setScoreBoard();
   } else if (win === '' && moves === 9) {
-    alert('It is tie');
+    alert('It\'s a tie');
     score.tie += 1;
     gameOver = 1;
     setScoreBoard();
@@ -134,6 +133,10 @@ $('.cell').on('click', function() {
       addToList();
       turn = 'PlayerO';
       checkWinner();
+
+      if(gameOver === 1) {
+        return;
+      }
 
       // now it is player O turn
       moves++;
