@@ -96,6 +96,15 @@ var _computerPlayPosition = function(moves) {
           return i;
         }
 
+        // if non of the above gets a winner set the element back to empty
+        currentBoard[i] = '';
+      }
+    }
+
+    for (var i = 0; i < 9; i++) {
+
+      if (currentBoard[i] === '') {
+
         // set current element to O and if that position wins return the index
         currentBoard[i] = 'X';
         if (_checkWin(currentBoard[i]) === 'X') {
